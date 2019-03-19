@@ -9,3 +9,9 @@ This is very much a simple script, but I highly recommend letting me know how it
 Thank you,
 
 Braeden Christensen
+
+
+TODO:
+Add file checking to ensure we have removed a directory/file so that we can ensure we have uninstalled.
+Add a way to download the License Removal Tool so that when we run this uninstaller we don't have to segment the process into two halves.
+Let's make this a seamless, easy experience.
