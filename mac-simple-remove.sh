@@ -19,7 +19,7 @@ echo "and then have you run another program from Microsoft. There is no method o
 read -p "If you are sure, enter 'YES', enter anything else to abort: " confirm
 
 case $confirm in
-    YES ) echo "Uninstalling!!";
+    [YyEeSs ) echo "Uninstalling!!";
     echo "Bail out in 5 seconds or else!";
     sleep 5;;
 	  
@@ -29,16 +29,37 @@ case $confirm in
 esac
 
 #remove the office apps
+echo 'Removing Apps'
+sleep 1
 rm -v '/Applications/Microsoft Word'
 rm -v '/Applications/Microsoft Outlook'
 rm -v '/Applications/Microsoft Powerpoint'
 rm -v '/Applications/Microsoft Excel'
-
+rm -v '/Applications/Microsoft OneNote'
+rm -v '/Applications/OneDrive'
 #remove the container folders EXCEPT for outlook
-rm -v '~/Group Containers/'
+echo ' Removing container folders'
+sleep 1
+rm -v './Containers/com.microsoft.errorreporting'
+rm -v './Containers/com.microsoft.Excel'
+rm -v './Containers/com.microsoft.netlib.shipassertprocess'
+rm -v './Containers/com.microsoft.Powerpoint'
+rm -v './Containers/com.microsort.RMS-XPCService'
+rm -v './Containers/com.microsoft.Word'
+rm -v './Containers/com.microsoft.onenote.mac'
 #rename outlook instead to protect user information from being deleted.
+echo 'Renaming Outlook folder to retain contacts, emails, and calendar just in case.'
+mv './Containers/com.microsoft.Outlook' '~/Containers/com.microsoft.Outlook.old'
+
+#Clear Group Containers
+echo 'Removing Group Containers'
+rm -v './Group Containers/UBF8T346G9.ms'
+rm -v './Group Containers/UBF8T346G9.Office'
+rm -v './Group Containers/UBF8T346G9.OfficeOsfWebHost'
 #have user download the license removal tool and run it.
+echo 'Download the license removal tool here to complete the uninstall: https://go.microsoft.com/fwlink/?linkid=849815'
 #have user reboot
-echo "It is -highly- recommended that you reboot after closing the terminal window."
+echo "It is recommended you reboot afterwards before reinstalling."
+echo "Please open an issue on the Github page for this script if you have improvements or find any bugs."
 exit
   
