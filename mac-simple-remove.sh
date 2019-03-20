@@ -6,6 +6,7 @@
 
 #check to see if we are running as root first
 
+
 if(( "$EUID" != 0 ))
   then
       echo "You must run this script as root or else we can't install!"
@@ -19,7 +20,7 @@ echo "and then have you run another program from Microsoft. There is no method o
 read -p "If you are sure, enter 'YES', enter anything else to abort: " confirm
 
 case $confirm in
-    [YyEeSs ) echo "Uninstalling!!";
+    [Yy][Ee][Ss] ) echo "Uninstalling!!";
     echo "Bail out in 5 seconds or else!";
     sleep 5;;
 	  
@@ -27,6 +28,10 @@ case $confirm in
 	sleep 2 #wait for 2 seconds to give the user time to understand what happened.
 	exit;;
 esac
+
+#move to user's home directory
+echo 'Moving to:/home/'$(logname)
+cd /home/$(logname)
 
 #remove the office apps
 echo 'Removing Apps'
@@ -49,7 +54,7 @@ rm -v './Containers/com.microsoft.Word'
 rm -v './Containers/com.microsoft.onenote.mac'
 #rename outlook instead to protect user information from being deleted.
 echo 'Renaming Outlook folder to retain contacts, emails, and calendar just in case.'
-mv './Containers/com.microsoft.Outlook' '~/Containers/com.microsoft.Outlook.old'
+mv './Containers/com.microsoft.Outlook' './Containers/com.microsoft.Outlook.old'
 
 #Clear Group Containers
 echo 'Removing Group Containers'
