@@ -6,6 +6,8 @@
 
 #check to see if we are running as root first
 
+#collect caller's home folder
+caller_home=/home/$(logname)
 
 if(( "$EUID" != 0 ))
   then
@@ -30,28 +32,28 @@ case $confirm in
 esac
 
 #move to user's home directory
-echo 'Moving to:/home/'$(logname)
-cd /home/$(logname)
+echo 'Moving to: '$caller_home
+cd $caller_home
 
 #remove the office apps
 echo 'Removing Apps'
 sleep 1
-rm -v '/Applications/Microsoft Word'
-rm -v '/Applications/Microsoft Outlook'
-rm -v '/Applications/Microsoft Powerpoint'
-rm -v '/Applications/Microsoft Excel'
-rm -v '/Applications/Microsoft OneNote'
-rm -v '/Applications/OneDrive'
+rm -vv '/Applications/Microsoft Word'
+rm -vv '/Applications/Microsoft Outlook'
+rm -vv '/Applications/Microsoft Powerpoint'
+rm -vv '/Applications/Microsoft Excel'
+rm -vv '/Applications/Microsoft OneNote'
+rm -vv '/Applications/OneDrive'
 #remove the container folders EXCEPT for outlook
 echo ' Removing container folders'
 sleep 1
-rm -v './Containers/com.microsoft.errorreporting'
-rm -v './Containers/com.microsoft.Excel'
-rm -v './Containers/com.microsoft.netlib.shipassertprocess'
-rm -v './Containers/com.microsoft.Powerpoint'
-rm -v './Containers/com.microsort.RMS-XPCService'
-rm -v './Containers/com.microsoft.Word'
-rm -v './Containers/com.microsoft.onenote.mac'
+rm -vv './Containers/com.microsoft.errorreporting'
+rm -vv './Containers/com.microsoft.Excel'
+rm -vv './Containers/com.microsoft.netlib.shipassertprocess'
+rm -vv './Containers/com.microsoft.Powerpoint'
+rm -vv './Containers/com.microsort.RMS-XPCService'
+rm -vv './Containers/com.microsoft.Word'
+rm -vv './Containers/com.microsoft.onenote.mac'
 #rename outlook instead to protect user information from being deleted.
 echo 'Renaming Outlook folder to retain contacts, emails, and calendar just in case.'
 mv './Containers/com.microsoft.Outlook' './Containers/com.microsoft.Outlook.old'
